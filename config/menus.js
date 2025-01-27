@@ -988,9 +988,65 @@ export const menusConfig = {
         icon: DashBoard,
         child: [
           {
-            title: "Patient",
+            title: "Analytics",
             href: "/dashboard",
             icon: Graph,
+          },
+          {
+            title: "Teacher Onboard",
+            href: "/teacher-onboard",
+            icon: Cart,
+          },
+          {
+            title: "Student Onboard",
+            href: "/student-onboard",
+            icon: ClipBoard,
+          },
+          // {
+          //   title: "Pending Request",
+          //   href: "/pending-request",
+          //   icon: Messages,
+          // },
+          {
+            title: "Pending Request",
+            icon: ClipBoard,
+            nested: [
+              {
+                title: "Teacher",
+                icon: ClipBoard,
+                href: "/pending-request-teacher",
+              },
+              {
+                title: "Student",
+                icon: ClipBoard,
+                href: "/pending-request-student",
+              },
+            ],
+          },
+          {
+            title: "Total Teachers",
+            href: "/total-teachers",
+            icon: Envelope,
+          },
+          {
+            title: "Total Students",
+            href: "/total-students",
+            icon: ListFill,
+          },
+          {
+            title: "Student Result",
+            href: "/student-result",
+            icon: Calendar,
+          },
+          {
+            title: "Profile",
+            href: "/profile",
+            icon: ClipBoard,
+          },
+          {
+            title: "Contact Support",
+            href: "/contact-support",
+            icon: Flag,
           },
           // {
           //   title: "Ecommerce",
