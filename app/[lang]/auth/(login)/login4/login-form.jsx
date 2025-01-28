@@ -73,53 +73,53 @@ const LogInForm = () => {
 
   const onSubmit = async (data) => {
     startTransition(async () => {
-      try {
-        console.log("Logging in with:", data.email, data.password);
+      // try {
+      //   console.log("Logging in with:", data.email, data.password);
   
-        const response = await fetch(
-          "https://em4wuex6mh.ap-south-1.awsapprunner.com/api/auth/login",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json",
-            },
-            body: JSON.stringify({
-              email: data.email,
-              password: data.password,
-            }),
-          }
-        );
+      //   const response = await fetch(
+      //     "https://em4wuex6mh.ap-south-1.awsapprunner.com/api/auth/login",
+      //     {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //         "Accept": "application/json",
+      //       },
+      //       body: JSON.stringify({
+      //         email: data.email,
+      //         password: data.password,
+      //       }),
+      //     }
+      //   );
   
-        if (!response.ok) {
-          const errorResponse = await response.json();
-          throw new Error(errorResponse.message || "Login failed");
-        }
+      //   if (!response.ok) {
+      //     const errorResponse = await response.json();
+      //     throw new Error(errorResponse.message || "Login failed");
+      //   }
   
-        const result = await response.json();
-        console.log("Login successful:", result);
+      //   const result = await response.json();
+      //   console.log("Login successful:", result);
   
-        // ✅ Store token in localStorage before redirection
-        localStorage.setItem("authToken", result.token);
-        localStorage.setItem("user", JSON.stringify(result.user));
+      //   // ✅ Store token in localStorage before redirection
+      //   localStorage.setItem("authToken", result.token);
+      //   localStorage.setItem("user", JSON.stringify(result.user));
   
-        toast.success("Login Successful!");
+      //   toast.success("Login Successful!");
   
-        // ✅ Correct the signIn function to ensure proper redirection
-        await signIn("credentials", {
-          email: data.email,
-          password: data.password,
-          redirect: false, // ✅ Prevent NextAuth from overriding redirection
-        });
+      //   // ✅ Correct the signIn function to ensure proper redirection
+      //   await signIn("credentials", {
+      //     email: data.email,
+      //     password: data.password,
+      //     redirect: false, // ✅ Prevent NextAuth from overriding redirection
+      //   });
   
         // ✅ Redirect manually to the correct dashboard page
         window.location.href = "/en/dashboard";
   
-        reset(); // Reset form after login
-      } catch (error) {
-        console.error("Login error:", error);
-        toast.error(error.message || "Network error. Please try again.");
-      }
+      //   reset(); // Reset form after login
+      // } catch (error) {
+      //   console.error("Login error:", error);
+      //   toast.error(error.message || "Network error. Please try again.");
+      // }
     });
   };
   

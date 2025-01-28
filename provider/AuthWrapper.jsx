@@ -101,14 +101,14 @@ const AuthWrapper = ({ children }) => {
   const pathname = usePathname(); // ✅ Get current route
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    // const token = localStorage.getItem("authToken");
 
-    if (!token) {
-      // ✅ If NOT logged in, redirect to login page
-      if (pathname !== "/en") {
-        router.replace("/en");
-      }
-    } 
+    // if (!token) {
+    //   // ✅ If NOT logged in, redirect to login page
+    //   if (pathname !== "/en") {
+    //     router.replace("/en");
+    //   }
+    // } 
     // else {
     //   // ✅ If logged in, redirect to dashboard (except when already there)
     //   if (pathname === "/en" || pathname === "/") {
