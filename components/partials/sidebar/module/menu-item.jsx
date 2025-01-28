@@ -9,15 +9,22 @@ function NavLink({ childItem, locationName, trans }) {
   const { href, icon, title, badge } = childItem;
   return (
     <Link
-      href={href}
+      // href={href}
+      href={href.replace(/\/{2,}/g, "/")} // Removes double slashes
       className={cn(
         "flex  font-medium  text-sm capitalize px-[10px] py-3 gap-3 rounded-md cursor-pointer",
         {
           "bg-primary text-primary-foreground": isLocationMatch(
-            href,
-            locationName
+            // href,
+            href.replace(/\/{2,}/g, "/"), // Ensure active match works
+            // locationName
+            locationName.replace(/\/{2,}/g, "/")
           ),
-          " text-default-600": !isLocationMatch(href, locationName),
+          " text-default-600": !isLocationMatch(
+            // href, locationName
+            href.replace(/\/{2,}/g, "/"),
+            locationName.replace(/\/{2,}/g, "/")
+            ),
         }
       )}
     >
