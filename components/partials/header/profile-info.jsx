@@ -18,7 +18,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import userImg from './cogtrain-user-img.png'
+// import userImg from './cogtrain-user-img.png'
+import userImg from '@/public/images/cogtrain-user-img.png'
+
 
 const ProfileInfo = () => {
   const [userData, setUserData] = useState(null);
