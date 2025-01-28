@@ -101,11 +101,6 @@ export const demoMenus = [
         image: ecommercePage,
       },
       {
-        title: "Student Onboard",
-        href: "/student-onboard",
-        icon: ClipBoard,
-      },
-      {
         title: "Project ",
         href: "/project",
         icon: ClipBoard,

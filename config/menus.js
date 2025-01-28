@@ -60,11 +60,6 @@ export const menusConfig = {
           icon: Cart,
         },
         {
-          title: "Student Onboard",
-          href: "/student-onboard",
-          icon: ClipBoard,
-        },
-        {
           title: "Project ",
           href: "/project",
           icon: ClipBoard,
@@ -999,7 +994,7 @@ export const menusConfig = {
           },
           {
             title: "Teacher Onboard",
-            href: "teacher-onboard",
+            href: "/teacher-onboard",
             icon: Cart,
           },
           {
@@ -1053,11 +1048,11 @@ export const menusConfig = {
             href: "/contact-support",
             icon: Flag,
           },
-          {
-            title: "Ecommerce",
-            href: "/ecommerce",
-            icon: Cart,
-          },
+          // {
+          //   title: "Ecommerce",
+          //   href: "/ecommerce",
+          //   icon: Cart,
+          // },
           // {
           //   title: "project ",
           //   href: "/project",
@@ -2102,11 +2097,6 @@ export const menusConfig = {
             title: "Ecommerce",
             href: "/ecommerce",
             icon: Cart,
-          },
-          {
-            title: "Student Onboard",
-            href: "/student-onboard",
-            icon: ClipBoard,
           },
           {
             title: "Project ",
