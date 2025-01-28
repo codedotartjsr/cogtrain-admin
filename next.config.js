@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+
+  trailingSlash: false, // Ensure Next.js does not add extra slashes
+  reactStrictMode: true,
+
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -48,6 +52,18 @@ const nextConfig = {
       },
     ],
   },
+
+  // Ensure URLs are clean without duplicate slashes
+  async redirects() {
+    return [
+      {
+        source: "/:path*/",
+        destination: "/:path*",
+        permanent: true,
+      },
+    ];
+  },
+  
 };
 
 module.exports = nextConfig;
