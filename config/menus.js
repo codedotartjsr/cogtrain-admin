@@ -989,17 +989,17 @@ export const menusConfig = {
         child: [
           {
             title: "Analytics",
-            href: "/dashboard",
+            href: "dashboard",
             icon: Graph,
           },
           {
             title: "Teacher Onboard",
-            href: "/teacher-onboard",
+            href: "teacher-onboard",
             icon: Cart,
           },
           {
             title: "Student Onboard",
-            href: "/student-onboard",
+            href: "student-onboard",
             icon: ClipBoard,
           },
           // {
@@ -1014,38 +1014,38 @@ export const menusConfig = {
               {
                 title: "Teacher",
                 icon: ClipBoard,
-                href: "/pending-request-teacher",
+                href: "pending-request-teacher",
               },
               {
                 title: "Student",
                 icon: ClipBoard,
-                href: "/pending-request-student",
+                href: "pending-request-student",
               },
             ],
           },
           {
             title: "Total Teachers",
-            href: "/total-teachers",
+            href: "total-teachers",
             icon: Envelope,
           },
           {
             title: "Total Students",
-            href: "/total-students",
+            href: "total-students",
             icon: ListFill,
           },
           {
             title: "Student Result",
-            href: "/student-result",
+            href: "student-result",
             icon: Calendar,
           },
           {
             title: "Profile",
-            href: "/profile",
+            href: "profile",
             icon: ClipBoard,
           },
           {
             title: "Contact Support",
-            href: "/contact-support",
+            href: "contact-support",
             icon: Flag,
           },
           // {
