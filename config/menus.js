@@ -994,7 +994,7 @@ export const menusConfig = {
           },
           {
             title: "Teacher Onboard",
-            href: "/teacher-onboard",
+            href: "teacher-onboard",
             icon: Cart,
           },
           {
@@ -1048,11 +1048,11 @@ export const menusConfig = {
             href: "/contact-support",
             icon: Flag,
           },
-          // {
-          //   title: "Ecommerce",
-          //   href: "/ecommerce",
-          //   icon: Cart,
-          // },
+          {
+            title: "Ecommerce",
+            href: "/ecommerce",
+            icon: Cart,
+          },
           // {
           //   title: "project ",
           //   href: "/project",
