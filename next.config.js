@@ -2,8 +2,8 @@
 
 const nextConfig = {
 
-  trailingSlash: false, // Ensure Next.js does not add extra slashes
-  reactStrictMode: true,
+  // trailingSlash: false, // Ensure Next.js does not add extra slashes
+  // reactStrictMode: true,
 
   webpack(config) {
     // Grab the existing rule that handles SVG imports
@@ -54,16 +54,16 @@ const nextConfig = {
   },
 
   // Ensure URLs are clean without duplicate slashes
-  async redirects() {
-    return [
-      {
-        source: "/:path*/",
-        destination: "/:path*",
-        permanent: true,
-      },
-    ];
-  },
-  
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/:path*/",
+  //       destination: "/:path*",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
+
 };
 
 module.exports = nextConfig;
