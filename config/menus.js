@@ -60,6 +60,11 @@ export const menusConfig = {
           icon: Cart,
         },
         {
+          title: "Student Onboard",
+          href: "/student-onboard",
+          icon: ClipBoard,
+        },
+        {
           title: "Project ",
           href: "/project",
           icon: ClipBoard,
@@ -2097,6 +2102,11 @@ export const menusConfig = {
             title: "Ecommerce",
             href: "/ecommerce",
             icon: Cart,
+          },
+          {
+            title: "Student Onboard",
+            href: "/student-onboard",
+            icon: ClipBoard,
           },
           {
             title: "Project ",
