@@ -113,8 +113,7 @@ const LogInForm = () => {
       //   });
   
         // ✅ Redirect manually to the correct dashboard page
-        // window.location.href = "/en/dashboard";
-        window.location.href = "/dashboard";
+        window.location.href = "/en/dashboard";
   
       //   reset(); // Reset form after login
       // } catch (error) {
