@@ -7,19 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
-import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Image from "next/image";
 import { Icon } from "@iconify/react";
-import { Checkbox } from "@/components/ui/checkbox";
-import googleIcon from "@/public/images/auth/google.png";
-import facebook from "@/public/images/auth/facebook.png";
-import twitter from "@/public/images/auth/twitter.png";
-import GithubIcon from "@/public/images/auth/github.png";
 import { SiteLogo } from "@/components/svg";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import config from "@/config/config";
 
 const schema = z.object({
   email: z.string().email({ message: "Your email is invalid." }),
@@ -45,81 +39,51 @@ const LogInForm = () => {
   } = useForm({
     resolver: zodResolver(schema),
     mode: "all",
-    // defaultValues: {
-    //   email: "test12@mail.com",
-    //   password: "password",
-    // },
   });
   const [isVisible, setIsVisible] = React.useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  // const onSubmit = (data) => {
-  //   startTransition(async () => {
-  //     let response = await signIn("credentials", {
-  //       email: data.email,
-  //       password: data.password,
-  //       redirect: false,
-  //     });
-  //     if (response?.ok) {
-  //       toast.success("Login Successful");
-  //       window.location.assign("/dashboard");
-  //       reset();
-  //     } else if (response?.error) {
-  //       toast.error(response?.error);
-  //     }
-  //   });
-  // };
-
   const onSubmit = async (data) => {
     startTransition(async () => {
-      // try {
-      //   console.log("Logging in with:", data.email, data.password);
+      try {
+        console.log("Logging in with:", data.email, data.password);
   
-      //   const response = await fetch(
-      //     "https://em4wuex6mh.ap-south-1.awsapprunner.com/api/auth/login",
-      //     {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         "Accept": "application/json",
-      //       },
-      //       body: JSON.stringify({
-      //         email: data.email,
-      //         password: data.password,
-      //       }),
-      //     }
-      //   );
+        const response = await fetch(
+          // "https://em4wuex6mh.ap-south-1.awsapprunner.com/api/auth/login",
+          `${config.API_BASE_URL}/auth/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify({
+              email: data.email,
+              password: data.password,
+            }),
+          }
+        );
   
-      //   if (!response.ok) {
-      //     const errorResponse = await response.json();
-      //     throw new Error(errorResponse.message || "Login failed");
-      //   }
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.message || "Login failed");
+        }
   
-      //   const result = await response.json();
-      //   console.log("Login successful:", result);
+        const result = await response.json();
+        console.log("Login successful:", result);
   
-      //   // ✅ Store token in localStorage before redirection
-      //   localStorage.setItem("authToken", result.token);
-      //   localStorage.setItem("user", JSON.stringify(result.user));
+        localStorage.setItem("authToken", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
   
-      //   toast.success("Login Successful!");
-  
-      //   // ✅ Correct the signIn function to ensure proper redirection
-      //   await signIn("credentials", {
-      //     email: data.email,
-      //     password: data.password,
-      //     redirect: false, // ✅ Prevent NextAuth from overriding redirection
-      //   });
-  
-        // ✅ Redirect manually to the correct dashboard page
+        toast.success("Login Successful!");
         window.location.href = "/en/dashboard";
   
-      //   reset(); // Reset form after login
-      // } catch (error) {
-      //   console.error("Login error:", error);
-      //   toast.error(error.message || "Network error. Please try again.");
-      // }
+        reset(); // Reset form after login
+      } catch (error) {
+        console.error("Login error:", error);
+        toast.error(error.message || "Network error. Please try again.");
+      }
     });
   };
   
@@ -209,22 +173,6 @@ const LogInForm = () => {
         )}
 
         <div className="mt-5  mb-6 flex flex-wrap gap-2">
-          {/* <div className="flex-1 flex  items-center gap-1.5 ">
-            <Checkbox
-              size="sm"
-              className="border-default-300 mt-[1px]"
-              id="isRemebered"
-            />
-            <Label
-              htmlFor="isRemebered"
-              className="text-sm text-default-600 cursor-pointer whitespace-nowrap"
-            >
-              Remember me
-            </Label>
-          </div>
-          <Link href="/auth/forgot4" className="flex-none text-sm text-primary">
-            Forget Password?
-          </Link> */}
         </div>
         <Button
           className="w-full"
@@ -235,60 +183,6 @@ const LogInForm = () => {
           {isPending ? "Loading..." : "Sign In"}
         </Button>
       </form>
-      {/* <div className="mt-8 flex flex-wrap justify-center gap-4">
-        <Button
-          type="button"
-          size="icon"
-          variant="outline"
-          className="rounded-full  border-default-300 hover:bg-transparent"
-          disabled={isPending}
-          onClick={() =>
-            signIn("google", {
-              callbackUrl: "/dashboard",
-            })
-          }
-        >
-          <Image src={googleIcon} alt="google" className="w-5 h-5" />
-        </Button>
-        <Button
-          type="button"
-          size="icon"
-          variant="outline"
-          className="rounded-full border-default-300 hover:bg-transparent"
-          disabled={isPending}
-          onClick={() =>
-            signIn("github", {
-              callbackUrl: "/dashboard",
-              redirect: false,
-            })
-          }
-        >
-          <Image src={GithubIcon} alt="google" className="w-5 h-5" />
-        </Button>
-        <Button
-          type="button"
-          size="icon"
-          variant="outline"
-          className="rounded-full  border-default-300 hover:bg-transparent"
-        >
-          <Image src={facebook} alt="google" className="w-5 h-5" />
-        </Button>
-        <Button
-          type="button"
-          size="icon"
-          variant="outline"
-          className="rounded-full  border-default-300 hover:bg-transparent"
-        >
-          <Image src={twitter} alt="google" className="w-5 h-5" />
-        </Button>
-      </div> */}
-      {/* <div className="mt-6 text-center text-base text-default-600">
-        Don't have an account?{" "}
-        <Link href="/auth/register4" className="text-primary">
-          {" "}
-          Sign Up{" "}
-        </Link>
-      </div> */}
     </div>
   );
 };

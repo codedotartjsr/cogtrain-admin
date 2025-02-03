@@ -9,10 +9,10 @@ import SingleMenuItem from "./single-menu-item";
 import SubMenuHandler from "./sub-menu-handler";
 import NestedSubMenu from "../common/nested-menus";
 import { useSidebar, useThemeStore } from "@/store";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { usePathname } from "next/navigation";
-import AddBlock from "../common/add-block";
+// import AddBlock from "../common/add-block";
 
 const PopoverSidebar = ({ trans }) => {
   const { collapsed, sidebarBg } = useSidebar();
@@ -82,7 +82,7 @@ const PopoverSidebar = ({ trans }) => {
         ></div>
       )}
       <SidebarLogo collapsed={collapsed} />
-      <Separator />
+      {/* <Separator /> */}
       <ScrollArea
         className={cn("sidebar-menu  h-[calc(100%-80px)] ", {
           "px-4": !collapsed,
@@ -141,7 +141,7 @@ const PopoverSidebar = ({ trans }) => {
         </ul>
         {!collapsed && (
           <div className="-mx-2 ">
-            <AddBlock />
+            {/* <AddBlock /> */}
           </div>
         )}
       </ScrollArea>

@@ -88,5 +88,15 @@ export { default as Sun } from "./duel-tone/sun.svg";
 export { default as Moon } from "./duel-tone/moon.svg";
 export { default as Device } from "./duel-tone/device.svg";
 
+// export { default as DSearch } from "./duel-tone/dsearch.svg";
+// export { default as Expand } from "./duel-tone/expand.svg";
+// export { default as SiteLogo } from "./duel-tone/logo.svg";
+// export { default as Settings } from "./duel-tone/settings.svg";
+// export { default as Envelope } from "./duel-tone/envelope.svg";
+// export { default as MenuBar } from "./duel-tone/menu-bar.svg";
+// export { default as Sun } from "./duel-tone/sun.svg";
+// export { default as Moon } from "./duel-tone/moon.svg";
+// export { default as Device } from "./duel-tone/device.svg";
+
 // sidebar icon
 export { default as FolderTree } from "./home/foldertree.svg";

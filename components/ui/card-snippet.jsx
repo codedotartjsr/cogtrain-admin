@@ -15,7 +15,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+// import { Switch } from "@/components/ui/switch";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { themes } from "@/config/thems";
@@ -44,7 +44,7 @@ const CardSnippet = ({ title, code, children }) => {
   const hexPrimary2 = hslToHex(hslPrimary2);
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center">
+      <CardHeader className="flex flex-row items-center mt-6">
         {title && (
           <CardTitle className="flex-1 leading-normal"> {title}</CardTitle>
         )}

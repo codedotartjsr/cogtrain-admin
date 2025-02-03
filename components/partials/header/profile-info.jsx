@@ -1,5 +1,5 @@
 "use client";
-import { useSession, signOut } from "next-auth/react";
+// import { useSession, signOut } from "next-auth/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +24,7 @@ import userImg from '@/public/images/cogtrain-user-img.png'
 
 const ProfileInfo = () => {
   const [userData, setUserData] = useState(null);
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const router = useRouter();
 
@@ -49,34 +49,34 @@ const ProfileInfo = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild className=" cursor-pointer">
         <div className=" flex items-center  ">
-          {session?.user?.image && (
+          {/* {session?.user?.image && ( */}
             <Image
               // src={session?.user?.image}
               src={userImg}
-              alt={session?.user?.name ?? ""}
+              // alt={session?.user?.name ?? ""}
               width={36}
               height={36}
               className="rounded-full"
             />
-          )}
+          {/* )} */}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 p-0" align="end">
         <DropdownMenuLabel className="flex gap-2 items-center mb-1 p-3">
-          {session?.user?.image && (
+          {/* {session?.user?.image && ( */}
             <Image
               // src={session?.user?.image}
               src={userImg}
-              alt={session?.user?.name ?? ""}
+              // alt={session?.user?.name ?? ""}
               width={36}
               height={36}
               className="rounded-full"
             />
-          )}
+          {/* )} */}
           <div>
             <div className="text-sm font-medium text-default-800 capitalize ">
               {/* {session?.user?.name ?? "Mcc Callem"} */}
-              Robokart
+              Cogtrain
             </div>
             <Link
               href="/dashboard"

@@ -1,5 +1,5 @@
 "use client";
-import { useSession, signIn, signOut } from "next-auth/react";
+// import { useSession, signIn, signOut } from "next-auth/react";
 import { Icon } from "@iconify/react";
 
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const LogoutFooter = ({ menus }) => {
   const [userData, setUserData] = useState(null);
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const router = useRouter();
 
@@ -37,7 +37,7 @@ const LogoutFooter = ({ menus }) => {
         <div className="flex-1">
           <div className=" text-default-700 font-semibold text-sm capitalize mb-0.5 truncate">
             {/* {session?.user?.name} */}
-            Robokart
+            Cogtrain
           </div>
           <div className=" text-xs text-default-600  truncate">
             {/* {session?.user?.email} */}

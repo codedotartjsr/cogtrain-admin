@@ -84,10 +84,9 @@ const FooterContent = () => {
     <div className="block md:flex md:justify-between text-muted-foreground">
       <p className="sm:mb-0 text-xs md:text-sm">
         COPYRIGHT © {new Date().getFullYear()} {" "}
-        {/* CodeDotArt  */}
         <a
           className="text-primary hover:underline"
-          href="https://codedotart.com" // Change this to the correct URL
+          href="https://codedotart.com"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -105,13 +104,6 @@ const FooterContent = () => {
         >
           CodeDotArt
         </a>
-        {/* <a
-          className="text-primary"
-          target="__blank"
-          href="https://codeshaper.net"
-        >
-          Codeshaper
-        </a> */}
       </p>
     </div>
   );

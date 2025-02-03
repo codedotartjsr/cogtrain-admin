@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ThemeCustomize from "../customizer/theme-customizer";
+// import ThemeCustomize from "../customizer/theme-customizer";
 import { MenuBar, Settings, SiteLogo, DSearch } from "@/components/svg";
 import Link from "next/link";
 const MobileFooter = ({ handleOpenSearch }) => {
@@ -21,9 +21,9 @@ const MobileFooter = ({ handleOpenSearch }) => {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center">
-        <ThemeCustomize
+        {/* <ThemeCustomize
           trigger={<Settings className="h-6 w-6  cursor-pointer" />}
-        />
+        /> */}
         <p className="mb-0 mt-1.5 text-xs text-default-600">Settings</p>
       </div>
     </footer>
