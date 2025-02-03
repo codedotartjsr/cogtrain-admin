@@ -20,19 +20,11 @@ const CheckboxWithAction = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user?.id;
-  const API_URL = `${config.API_BASE_URL}/auth/users/${userId}`;
-  const TOKEN = localStorage.getItem('authToken');
+  const API_URL = `${config.API_BASE_URL}/auth/users`;
+  const TOKEN = localStorage.getItem("authToken");
 
   useEffect(() => {
     const fetchUsers = async () => {
-      if (!userId) {
-        setError("User ID not found.");
-        setLoading(false);
-        return;
-      }
-
       try {
         setLoading(true);
         const response = await fetch(API_URL, {
@@ -49,11 +41,9 @@ const CheckboxWithAction = () => {
 
         const data = await response.json();
 
-        if (data.role.includes("patient")) {
-          setUsers([data]);
-        } else {
-          setUsers([]);
-        }
+        // Filter users with the role 'patient'
+        const filteredUsers = data.filter((user) => user.role.includes("patient"));
+        setUsers(filteredUsers);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -62,7 +52,7 @@ const CheckboxWithAction = () => {
     };
 
     fetchUsers();
-  }, [API_URL, userId]);
+  }, [API_URL]);
 
   const handleRowSelect = (id) => {
     setSelectedRows((prev) =>
@@ -81,7 +71,7 @@ const CheckboxWithAction = () => {
           <TableHead>Name</TableHead>
           <TableHead>Email</TableHead>
           <TableHead>Phone</TableHead>
-          <TableHead>Status</TableHead>
+          <TableHead>Approved</TableHead>
           <TableHead>Created At</TableHead>
         </TableRow>
       </TableHeader>
@@ -89,7 +79,7 @@ const CheckboxWithAction = () => {
       <TableBody>
         {users.length === 0 ? (
           <TableRow>
-            <TableCell colSpan={7} className="text-left text-gray-500 pl-4 pt-4 pb-4">
+            <TableCell colSpan={6} className="text-left text-gray-500 pl-4 pt-4 pb-4">
               No patient found.
             </TableCell>
           </TableRow>
@@ -107,15 +97,15 @@ const CheckboxWithAction = () => {
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.phone}</TableCell>
               <TableCell>
-                <Badge
-                  variant="soft"
-                  color={user.approved ? "success" : "warning"}
-                  className="capitalize"
+              <Badge
+                    variant="soft"
+                    color={user.approved ? "success" : "warning"}
+                    className="capitalize"
                 >
-                  {user.approved ? "Approved" : "Pending"}
+                    {user.approved.toString()}
                 </Badge>
               </TableCell>
-              <TableCell>{new Date(user.created_at).toLocaleString()}</TableCell>
+              <TableCell>{new Date(user.createdAt).toLocaleString()}</TableCell>
             </TableRow>
           ))
         )}
