@@ -13,12 +13,17 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import config from "@/config/config";
+import toast from "react-hot-toast";
+import SessionData from './session-data';
 
 const CheckboxWithAction = () => {
   const [users, setUsers] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sessionData, setSessionData] = useState(null);
+  const [showSessionData, setShowSessionData] = useState(false); 
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const API_URL = `${config.API_BASE_URL}/auth/users`;
   const TOKEN = localStorage.getItem("authToken");
@@ -41,7 +46,6 @@ const CheckboxWithAction = () => {
 
         const data = await response.json();
 
-        // Filter users with the role 'patient'
         const filteredUsers = data.filter((user) => user.role.includes("patient"));
         setUsers(filteredUsers);
       } catch (err) {
@@ -53,6 +57,58 @@ const CheckboxWithAction = () => {
 
     fetchUsers();
   }, [API_URL]);
+
+  const fetchSessionData = async (userId) => {
+    setLoading(true);
+    setSelectedUser(userId);
+
+    console.log("userId", userId);
+    const token = localStorage.getItem("authToken");
+  
+    try {
+      const response = await fetch(
+        // `https://em4wuex6mh.ap-south-1.awsapprunner.com/api/auth/therapist/patient/${userId}/tracking`,
+        `${config.API_BASE_URL}/auth/therapist/patient/${userId}/tracking`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      // if (!response.ok) throw new Error("Failed to fetch session data");
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (response.status === 403 && errorData.error === "Patient not assigned to this therapist") {
+          toast.error("Patient not assigned to this therapist.");
+        } else {
+          throw new Error("Failed to fetch session data");
+        }
+        return;
+      }
+  
+      const data = await response.json();
+      setSessionData(data);
+      setShowSessionData(true);
+      toast.success("Session data loaded successfully!");
+    } catch (error) {
+      console.error("Error fetching session data:", error);
+      toast.error("Error fetching session data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (showSessionData && sessionData) {
+    return (
+      <SessionData
+        data={sessionData}
+        onBack={() => setShowSessionData(false)}
+      />
+    );
+  }
 
   const handleRowSelect = (id) => {
     setSelectedRows((prev) =>
@@ -71,8 +127,10 @@ const CheckboxWithAction = () => {
           <TableHead>Name</TableHead>
           <TableHead>Email</TableHead>
           <TableHead>Phone</TableHead>
+          <TableHead>patientAlias</TableHead>
           <TableHead>Approved</TableHead>
           <TableHead>Created At</TableHead>
+          <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
 
@@ -87,8 +145,9 @@ const CheckboxWithAction = () => {
           users.map((user, index) => (
             <TableRow
               key={user.id}
-              className="hover:bg-muted"
+              className="hover:bg-muted cursor-pointer"
               data-state={selectedRows.includes(user.id) && "selected"}
+              onClick={() => fetchSessionData(user.id)}
             >
               <TableCell>{index + 1}</TableCell>
               <TableCell className="font-medium text-card-foreground/80">
@@ -96,6 +155,7 @@ const CheckboxWithAction = () => {
               </TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.phone}</TableCell>
+              <TableCell>{user.patientAlias}</TableCell>
               <TableCell>
               <Badge
                     variant="soft"
@@ -106,6 +166,11 @@ const CheckboxWithAction = () => {
                 </Badge>
               </TableCell>
               <TableCell>{new Date(user.createdAt).toLocaleString()}</TableCell>
+              <TableCell>
+                <Button size="icon" variant="outline">
+                  <Icon icon="heroicons:eye" className="h-4 w-4" />
+                </Button>
+              </TableCell>
             </TableRow>
           ))
         )}
